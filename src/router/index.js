@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Recommend from '@/views/recommend'
-import Search from '@/views/search'
-import Singer from '@/views/singer'
-import TopList from '@/views/top-list'
+import Recommend from '@/views/recommend.vue'
+import Search from '@/views/search.vue'
+import Singer from '@/views/singer.vue'
+import TopList from '@/views/top-list.vue'
 
 const routes = [
   {

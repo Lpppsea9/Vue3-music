@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Header from '@/components/header/header'
-import Tab from '@/components/tab/tab'
+import Header from '@/components/header/header.vue'
+import Tab from '@/components/tab/tab.vue'
 
 export default {
   components: {

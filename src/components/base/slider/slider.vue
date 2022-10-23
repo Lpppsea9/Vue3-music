@@ -1,39 +1,29 @@
 <template>
-  <div class="slide-banner" ref="rootRef">
-    <div class="banner-wrapper">
-      <div class="slide-banner-wrapper" ref="slide">
-        <div class="slide-banner-content">
-          <div
-            v-for="num in nums"
-            class="slide-page"
-            :class="'page' + num"
-            :key="num"
-          >
-            page {{ num }}
-          </div>
-        </div>
-      </div>
-      <div class="dots-wrapper">
-        <span
-          class="dot"
-          v-for="num in nums"
-          :key="num"
-          :class="{ active: currentPageIndex === num - 1 }"
-        >
-        </span>
+  <div class="slider" ref="rootRef">
+    <div class="slider-group">
+      <div class="slider-page" v-for="item in sliders" :key="item.id">
+        <a :href="item.link">
+          <img :src="item.pic" />
+        </a>
       </div>
     </div>
-    <div class="btn-wrap">
-      <button class="next" @click="nextPage">nextPage</button>
-      <button class="prev" @click="prePage">prePage</button>
+    <div class="dots-wrapper">
+      <span
+        class="dot"
+        v-for="(item, index) in sliders"
+        :key="item.id"
+        :class="{ active: currentPageIndex === index }"
+      >
+      </span>
     </div>
   </div>
 </template>
 <script>
 import { ref } from 'vue'
+import useSlider from './use-slider'
 
 export default {
-  name: 'slider-item',
+  name: 'base-slider',
   props: {
     sliders: {
       type: Array,
@@ -44,129 +34,57 @@ export default {
   },
   setup () {
     const rootRef = ref(null)
+    const { currentPageIndex } = useSlider(rootRef)
     return {
-      rootRef
+      rootRef,
+      currentPageIndex
     }
   },
-  data () {
-    return {
-      nums: 4,
-      currentPageIndex: 0
-    }
-  },
-  mounted () {
-    // this.init()
-  },
-  beforeUnmount () {
-    this.slide.destroy()
-  },
-  methods: {
-    // init () {
-    //   this.slide = new BScroll(this.$refs.slide, {
-    //     scrollX: true,
-    //     scrollY: false,
-    //     slide: true,
-    //     momentum: false,
-    //     bounce: false,
-    //     probeType: 3
-    //   })
-    //   this.slide.on('scrollEnd', this._onScrollEnd)
-
-    //   this.slide.on('slideWillChange', (page) => {
-    //     this.currentPageIndex = page.pageX
-    //   })
-
-    //   // v2.1.0
-    //   this.slide.on('slidePageChanged', (page) => {
-    //     console.log('CurrentPage changed to => ', page)
-    //   })
-    // },
-    _onScrollEnd () {
-      console.log('CurrentPage => ', this.slide.getCurrentPage())
-    },
-    nextPage () {
-      this.slide.next()
-    },
-    prePage () {
-      this.slide.prev()
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
-.slide-banner {
-  .banner-wrapper {
+.slider {
+  min-height: 1px;
+  font-size: 0;
+  touch-action: pan-y;
+  .slider-group {
     position: relative;
-  }
-
-  .slide-banner-wrapper {
-    min-height: 1px;
     overflow: hidden;
-  }
-
-  .slide-banner-content {
-    height: 200px;
     white-space: nowrap;
-    font-size: 0;
-
-    .slide-page {
+    .slider-page {
       display: inline-block;
-      height: 200px;
-      width: 100%;
-      line-height: 200px;
-      text-align: center;
-      font-size: 26px;
-
-      &.page1 {
-        background-color: #95b8d1;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      a {
+        display: block;
+        width: 100%;
       }
-
-      &.page2 {
-        background-color: #dda789;
-      }
-
-      &.page3 {
-        background-color: #c3d899;
-      }
-
-      &.page4 {
-        background-color: #f2d4a7;
+      img {
+        display: block;
+        width: 100%;
       }
     }
   }
-
   .dots-wrapper {
     position: absolute;
-    bottom: 4px;
     left: 50%;
+    bottom: 12px;
+    line-height: 12px;
     transform: translateX(-50%);
-
     .dot {
       display: inline-block;
       margin: 0 4px;
       width: 8px;
       height: 8px;
+      transform: translateZ(1px);
       border-radius: 50%;
-      background: #eee;
-
+      background: $color-text-l;
       &.active {
         width: 20px;
         border-radius: 5px;
+        background: $color-text-ll;
       }
-    }
-  }
-
-  .btn-wrap {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-
-    button {
-      margin: 0 10px;
-      padding: 10px;
-      color: #fff;
-      border-radius: 4px;
-      background-color: #666;
     }
   }
 }

@@ -11,8 +11,7 @@
 <script>
 export default {
   name: 'm-header',
-  methods: {
-  }
+  methods: {}
 }
 
 </script>
