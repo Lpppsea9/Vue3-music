@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <scroll class="recommend-content">
+    <scroll class="recommend-content" v-loadsss="loading">
       <div>
         <div class="slider-wrapper">
           <div class="slider-content">
@@ -12,7 +12,7 @@
           <ul>
             <li v-for="item in albums" class="item" :key="item.id">
               <div class="icon">
-                <img width="60" height="60" :src="item.pic" />
+                <img width="60" height="60" v-lazy="item.pic" />
               </div>
               <div class="text">
                 <h2 class="name">
@@ -40,6 +40,11 @@ export default {
   components: {
     Slider,
     Scroll
+  },
+  computed: {
+    loading () {
+      return !this.sliders.length && !this.albums.length
+    }
   },
   data () {
     return {
