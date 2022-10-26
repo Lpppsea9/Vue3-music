@@ -1,6 +1,6 @@
 <template>
-  <div class="recommend">
-    <scroll class="recommend-content" v-loadsss="loading">
+  <div class="recommend" v-loading:[textLoading]="true">
+    <scroll class="recommend-content">
       <div>
         <div class="slider-wrapper">
           <div class="slider-content">
@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="recommend-list">
-          <h1 class="list-title">热门歌单推荐</h1>
+          <h1 class="list-title" v-show="!loading">热门歌单推荐</h1>
           <ul>
             <li v-for="item in albums" class="item" :key="item.id">
               <div class="icon">
@@ -49,7 +49,8 @@ export default {
   data () {
     return {
       sliders: [],
-      albums: []
+      albums: [],
+      textLoading: '自定义载入...........'
     }
   },
   async created () {
