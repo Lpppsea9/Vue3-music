@@ -1,6 +1,6 @@
 # vue3-music
 
-## 通过 webpack5 构建开发模式和生产模式
+## webpack5 + vue3
 
 ## Project setup
 

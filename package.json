@@ -47,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lpppsea9/vue3-music.git"
+    "url": "git+https://github.com/Lpppsea9/Vue3-music.git"
   },
   "keywords": [],
   "author": "",
@@ -55,5 +55,5 @@
   "bugs": {
     "url": "https://github.com/Lpppsea9/vue3-music/issues"
   },
-  "homepage": "https://github.com/Lpppsea9/vue3-music#readme"
+  "homepage": "https://github.com/Lpppsea9/Vue3-music#readme"
 }
