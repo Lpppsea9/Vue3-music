@@ -1,6 +1,6 @@
 <template>
-  <div class="singer" v-loading="loading">
-    <index-list :data="singerList"></index-list>
+  <div class="singer" v-loading="!singerList.length">
+    <index-list :singers-data-list="singerList"></index-list>
   </div>
 </template>
 
@@ -12,11 +12,6 @@ export default {
   name: 'top-singer',
   components: {
     IndexList
-  },
-  computed: {
-    loading () {
-      return !this.singerList.length
-    }
   },
   data () {
     return {

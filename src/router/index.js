@@ -4,7 +4,7 @@ import Search from '@/views/search.vue'
 import Singer from '@/views/singer.vue'
 import TopList from '@/views/top-list.vue'
 
-import Loading from '@/components/base/loading/loading.vue'
+// import Loading from '@/components/base/loading/loading.vue'
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/search',
-    component: Loading
+    component: Search
   },
   {
     path: '/singer',

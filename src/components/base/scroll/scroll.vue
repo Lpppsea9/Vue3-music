@@ -14,11 +14,16 @@ export default {
     click: {
       type: Boolean,
       default: true
+    },
+    probeType: {
+      type: Number,
+      default: 0
     }
   },
-  setup (props) {
+  emits: ['scroll'],
+  setup (props, { emit }) {
     const rootRef = ref(null)
-    const scroll = userScroll(rootRef, props)
+    const { scroll } = userScroll(rootRef, props, emit)
 
     return {
       rootRef,
