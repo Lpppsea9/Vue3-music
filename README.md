@@ -1,6 +1,6 @@
 # vue3-music
 
-## webpack5 + vue3
+## developing... webpack5 + vue3
 
 ## Project setup
 
