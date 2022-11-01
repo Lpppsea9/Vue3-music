@@ -1,24 +1,27 @@
 # vue3-music
 
+# 通过 webpack5 构建开发模式和生产模式
+
 ## Project setup
+
 ```
-npm install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-npm run serve
+yarn dev
 ```
 
 ### Compiles and minifies for production
+
 ```
-npm run build
+yarn build
 ```
 
 ### Lints and fixes files
+
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
