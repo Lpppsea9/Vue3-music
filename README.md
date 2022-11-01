@@ -1,6 +1,6 @@
 # vue3-music
 
-# 通过 webpack5 构建开发模式和生产模式
+## 通过 webpack5 构建开发模式和生产模式
 
 ## Project setup
 
@@ -23,5 +23,5 @@ yarn build
 ### Lints and fixes files
 
 ```
-npm run lint
+yarn lint
 ```
