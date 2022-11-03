@@ -9,6 +9,7 @@ const loadingDirective = {
     const app = createApp(Loading)
     const instance = app.mount(document.createElement('div'))
     el.instance = instance
+
     const title = binding.arg
     if (typeof title !== 'undefined') {
       instance.setTitle(title)
@@ -41,7 +42,7 @@ function append (el) {
 
 function remove (el) {
   removeClass(el, relativeCls)
-  el.removeChild(el.instance.$el)
+  // el.removeChild(el.instance.$el)
 }
 
 export default loadingDirective

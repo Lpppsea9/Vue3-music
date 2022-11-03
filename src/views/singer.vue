@@ -1,6 +1,8 @@
 <template>
   <div class="singer" v-loading="!singerList.length">
-    <index-list :singers-data-list="singerList"></index-list>
+    <index-list :singers-data-list="singerList" @select="handleGetSingerDetail">
+    </index-list>
+    <router-view :singer="curSinger"></router-view>
   </div>
 </template>
 
@@ -15,7 +17,8 @@ export default {
   },
   data () {
     return {
-      singerList: []
+      singerList: [],
+      curSinger: null
     }
   },
   created () {
@@ -23,10 +26,19 @@ export default {
   },
 
   methods: {
+    // 获取歌手列表
     async handleGetSingerList () {
       const result = await getSingerList()
       this.singerList = result.singers
-      console.log('res->', result)
+    },
+
+    // 点击选择歌手
+    handleGetSingerDetail (singer) {
+      this.curSinger = singer
+      this.$router.push({
+        // path: `/singer/${singer.mid}`
+        path: `/singer/${singer.mid}`
+      })
     }
   }
 }

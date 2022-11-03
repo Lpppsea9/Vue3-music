@@ -4,7 +4,12 @@
       <li v-for="group in singersDataList" :key="group.id" class="group">
         <h2 class="title">{{ group.title }}</h2>
         <ul>
-          <li v-for="item in group.list" :key="item.id" class="item">
+          <li
+            v-for="item in group.list"
+            :key="item.id"
+            class="item"
+            @click="onSingerItemClick(item)"
+          >
             <img class="avatar" v-lazy="item.pic" />
             <span class="name">{{ item.name }}</span>
           </li>
@@ -12,13 +17,9 @@
       </li>
     </ul>
     <div v-show="fixedTitle" :style="fixedStyle" class="fixed">
-      <!-- <div class="aaa"></div> -->
-      <!-- <div class="aaa"></div> -->
-
       <div class="fixed-title">
         {{ fixedTitle }}
       </div>
-      <!-- <button @click="test">ClickTest</button> -->
     </div>
     <div
       class="fixed-shortcut"
@@ -55,17 +56,16 @@ export default {
       type: Array,
       default: () => []
     }
-    // shortcutList: {
-    //   type: Array,
-    //   default: () => [
-    //     '热',
-    //     'a'
-    //   ]
-    // }
   },
-  setup (props) {
+
+  setup (props, { emit }) {
     const { groupRef, onScroll, currentIndex, fixedTitle, fixedStyle } = useFixed(props)
     const { shortcutList, scrollRef, onShortcutTouchStart, onShortcutTouchMove } = useShortcut(props, groupRef)
+
+    // 点击歌手li元素
+    function onSingerItemClick (item) {
+      emit('select', item)
+    }
 
     return {
       // useFixed
@@ -78,13 +78,12 @@ export default {
       shortcutList,
       scrollRef,
       onShortcutTouchStart,
-      onShortcutTouchMove
+      onShortcutTouchMove,
+
+      onSingerItemClick
     }
   },
   methods: {
-    test () {
-      console.log(this.$props)
-    }
   }
 
 }
@@ -159,14 +158,5 @@ export default {
       }
     }
   }
-}
-.aaa {
-  width: 100px;
-  height: 100px;
-  background: powderblue;
-}
-.aaa:nth-child(2) {
-  background: red;
-  transform: translate3d(0, 10px, 0);
 }
 </style>

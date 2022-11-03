@@ -69,9 +69,7 @@ module.exports = {
 
     ]
   },
-  output: {
-    path: path.resolve(__dirname, './dist')
-  },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
@@ -87,6 +85,10 @@ module.exports = {
     })
 
   ],
+  output: {
+    path: path.resolve(__dirname, './dist')
+  },
+  devtool: 'inline-source-map',
   devServer: {
     // 开发服务器：不会输出资源，在内存中编译打包的
     host: 'localhost', // 启动服务器域名
