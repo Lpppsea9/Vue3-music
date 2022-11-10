@@ -1,5 +1,6 @@
 <template>
-  <div class="singer" v-loading="!singerList.length">
+  <!-- v-loading="!singerList.length" -->
+  <div class="singer">
     <index-list :singers-data-list="singerList" @select="handleGetSingerDetail">
     </index-list>
     <router-view :singer="curSinger"></router-view>
@@ -36,7 +37,6 @@ export default {
     handleGetSingerDetail (singer) {
       this.curSinger = singer
       this.$router.push({
-        // path: `/singer/${singer.mid}`
         path: `/singer/${singer.mid}`
       })
     }
@@ -51,5 +51,6 @@ export default {
   top: 88px;
   bottom: 0;
   // overflow: scroll;
+  z-index: 11;
 }
 </style>

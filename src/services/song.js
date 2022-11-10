@@ -4,18 +4,18 @@ export function processSongs (songs) {
   if (!songs.length) {
     return Promise.resolve(songs)
   }
-
-  return get('/api/getSongUrl', {
-    mid: songs.map(song => {
-      return song.mid
+  return get('/api/getSongsUrl', {
+    mid: songs.map((item) => {
+      return item.mid
     })
   }).then((result) => {
+    console.log('song请求', result)
     const map = result.map
-    return songs.map(song => {
+    return songs.map((song) => {
       song.url = map[song.mid]
       return song
-    }).filter(song => {
-      return song.url.indexOf('vkey') > -1
+    }).filter((song) => {
+      return song.url && song.url.indexOf('vkey') > -1
     })
   })
 }

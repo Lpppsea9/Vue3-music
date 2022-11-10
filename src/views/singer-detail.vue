@@ -1,31 +1,48 @@
 <template>
-  <div class="singer-detail">ssss</div>
+  <div class="singer-detail">
+    <music-list :songs="songs" :pic="pic" :title="title"></music-list>
+  </div>
 </template>
 
 <script>
 import { getSingerDetail } from '@/services/singer'
 import { processSongs } from '@/services/song'
+import MusicList from '@/components/music-list/music-list.vue'
 
 export default {
   name: 'singer-detail',
+  components: { MusicList },
   props: {
     singer: Object
   },
+  data () {
+    return {
+      songs: []
+    }
+  },
+  computed: {
+    pic () {
+      return this.singer && this.singer.pic
+    },
+    title () {
+      return this.singer && this.singer.name
+    }
+  },
   async created () {
     const result = await getSingerDetail(this.singer)
-    console.log('result=>', result)
-    const song = await processSongs(result)
-    console.log('song=>', song)
+    this.songs = await processSongs(result.songs)
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .singer-detail {
-  position: absolute;
-  width: 100%;
-  top: 88px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
   bottom: 0;
-  // overflow: scroll;
+  right: 0;
+  background: $color-background;
 }
 </style>
