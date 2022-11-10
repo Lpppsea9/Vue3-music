@@ -121,7 +121,6 @@ export default {
       }
     }
   }
-
   .fixed {
     position: absolute;
     width: 100%;
@@ -147,7 +146,6 @@ export default {
     text-align: center;
     background: $color-background-d;
     font-family: Helvetica;
-
     .item {
       padding: 3px;
       line-height: 1;

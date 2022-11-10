@@ -31,7 +31,6 @@ export default {
 
     },
     getDesc (song) {
-      console.log('参数', song)
       return `${song.singer}${song.album}`
     }
   }
@@ -51,6 +50,17 @@ export default {
   }
   .content {
     flex: 1;
+    line-height: 20px;
+    overflow: hidden;
+    .name {
+      @include no-wrap();
+      color: $color-text;
+    }
+    .desc {
+      @include no-wrap();
+      margin-top: 4px;
+      color: $color-text-d;
+    }
   }
 }
 </style>
