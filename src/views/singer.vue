@@ -3,13 +3,19 @@
   <div class="singer">
     <index-list :singers-data-list="singerList" @select="handleGetSingerDetail">
     </index-list>
-    <router-view :singer="curSinger"></router-view>
+    <router-view v-slot="{ Component }">
+      <transition name="slide">
+        <component :is="Component" :singer="curSinger" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
 import { getSingerList } from '@/services/singer'
 import IndexList from '@/components/base/index-list/index-list.vue'
+// import storage from 'good-storage'
+import { SINGER_KEY } from '@/assets/js/constant'
 
 export default {
   name: 'top-singer',
@@ -36,9 +42,14 @@ export default {
     // 点击选择歌手
     handleGetSingerDetail (singer) {
       this.curSinger = singer
+      this.caheSinger(singer)
       this.$router.push({
         path: `/singer/${singer.mid}`
       })
+    },
+
+    caheSinger (singer) {
+      sessionStorage.setItem(SINGER_KEY, JSON.stringify(singer))
     }
   }
 }

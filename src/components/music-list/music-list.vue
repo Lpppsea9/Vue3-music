@@ -5,12 +5,12 @@
     </div>
     <h1 class="title">{{ title }}</h1>
     <div class="bg-image" :style="bgImageStyle" ref="bgImage">
-      <!-- <div class="play-btn-wrapper" :style="playBtnStyle">
+      <div class="play-btn-wrapper" :style="playBtnStyle">
         <div v-show="songs.length > 0" class="play-btn" @click="random">
           <i class="icon-play"></i>
           <span class="text">随机播放全部</span>
         </div>
-      </div> -->
+      </div>
       <div class="filter" :style="filterStyle"></div>
     </div>
 
@@ -20,6 +20,7 @@
       :probe-type="3"
       @scroll="onScroll"
       v-loading="loading"
+      v-no-result:[noResultText]="noResult"
     >
       <div class="song-list-wrapper">
         <song-list :songs="songs" @select="selectItem" :rank="rank">
@@ -32,6 +33,7 @@
 <script>
 import Scroll from '@/components/base/scroll/scroll.vue'
 import SongList from '@/components/base/song-list/song-list.vue'
+import { mapActions } from 'vuex'
 
 const RESERVED_HEIGHT = 40
 export default {
@@ -52,13 +54,15 @@ export default {
     },
     loading: {
       type: Boolean
+    },
+    noResultText: {
+      type: String,
+      default: '自定义没有result'
     }
   },
   data () {
     return {
-      // bgImageStyle: null,
       playBtnStyle: null,
-      // scrollStyle: null,
       rank: [],
       imageHeight: 0,
       scrollY: 0,
@@ -102,7 +106,6 @@ export default {
       const imageHeight = this.imageHeight
       // const maxTranslateY =
       const blur = Math.min(this.maxTranslateY / imageHeight, scrollY / imageHeight) * 20
-      console.log('blur', blur)
       return {
         backdropFilter: `blur(${blur}px)`
       }
@@ -111,6 +114,10 @@ export default {
       return {
         top: `${this.imageHeight}px`
       }
+    },
+    noResult() {
+      // console.log("计算noResult", !this.loading && !this.songs.length);
+      return !this.loading && !this.songs.length
     }
   },
   mounted () {
@@ -124,12 +131,20 @@ export default {
     goBack () {
       this.$router.back()
     },
-    random () {},
+    random () {
+      this.randomPlay(this.songs)
+    },
     onScroll (pos) {
       this.scrollY = -pos.y
       // console.log('往上滚动', this.scrollY)
     },
-    selectItem () {}
+    selectItem ({ song, index }) {
+      this.selectPlay({
+        list: this.songs,
+        index
+      })
+    },
+    ...mapActions(['selectPlay', 'randomPlay'])
   }
 }
 </script>

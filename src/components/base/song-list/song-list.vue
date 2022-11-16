@@ -23,12 +23,10 @@ export default {
       type: Array
     }
   },
-  mounted () {
-    console.log('song-list', this.songs)
-  },
+  emits: ['select'],
   methods: {
     selectItem (song, index) {
-
+      this.$emit('select', { song, index })
     },
     getDesc (song) {
       return `${song.singer}${song.album}`

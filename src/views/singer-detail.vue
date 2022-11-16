@@ -13,6 +13,7 @@
 import { getSingerDetail } from '@/services/singer'
 import { processSongs } from '@/services/song'
 import MusicList from '@/components/music-list/music-list.vue'
+import { SINGER_KEY } from '@/assets/js/constant'
 
 export default {
   name: 'singer-detail',
@@ -27,18 +28,42 @@ export default {
     }
   },
   computed: {
+    computedSinger () {
+      let ret = null
+      const singer = this.singer
+      if (singer) {
+        ret = singer
+      } else {
+        const cached = JSON.parse(sessionStorage.getItem(SINGER_KEY))
+        if (cached && cached.mid === this.$route.params.id) {
+          ret = cached
+        }
+      }
+      return ret
+    },
     pic () {
-      return this.singer && this.singer.pic
+      const singer = this.computedSinger
+      return singer && singer.pic
     },
     title () {
-      return this.singer && this.singer.name
+      const singer = this.computedSinger
+      return singer && singer.name
     }
   },
   async created () {
-    const result = await getSingerDetail(this.singer)
+    // 如果改变路由则computedSinger为null，退回上级路由
+    if (!this.computedSinger) {
+      const path = this.$route.matched[0].path
+      this.$router.push({
+        path
+      })
+      return
+    }
+    const result = await getSingerDetail(this.computedSinger)
     this.songs = await processSongs(result.songs)
+    // this.songs = []
+
     this.loading = false
-    console.log('de', this.singer)
   }
 }
 </script>
