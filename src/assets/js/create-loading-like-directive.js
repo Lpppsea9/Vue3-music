@@ -18,7 +18,7 @@ export default function createLoadingLikeDirective(Comp) {
         instance.setTitle(title);
       }
 
-      console.log("binding->", binding);
+      // console.log("binding->", binding);
 
       if (binding.value) {
         append(el);

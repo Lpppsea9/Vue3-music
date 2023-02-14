@@ -123,7 +123,7 @@ export default {
   mounted () {
     // 计算图片的高度
     this.imageHeight = this.$refs.bgImage.clientHeight
-    console.log('高度', this.$refs.bgImage.clientHeight)
+    // console.log('高度', this.$refs.bgImage.clientHeight)
     // 计算图片高度减去标题高度40（得到允许向上滚动的最大高度）
     this.maxTranslateY = this.imageHeight - RESERVED_HEIGHT
   },
@@ -139,6 +139,7 @@ export default {
       // console.log('往上滚动', this.scrollY)
     },
     selectItem ({ song, index }) {
+      // 播放
       this.selectPlay({
         list: this.songs,
         index

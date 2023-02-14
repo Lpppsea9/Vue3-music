@@ -9,7 +9,7 @@ export function processSongs(songs) {
       return item.mid;
     }),
   }).then((result) => {
-    console.log("song请求", result);
+    // console.log("song请求", result);
     const map = result.map;
     return songs
       .map((song) => {

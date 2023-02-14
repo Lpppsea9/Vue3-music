@@ -5,7 +5,7 @@ import * as getters from "./getters";
 import * as actions from "./actions";
 const debug = process.env.NODE_ENV !== "production";
 
-console.log("debug", debug);
+// console.log("debug", debug);
 
 export default createStore({
   state,
