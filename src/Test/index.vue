@@ -7,6 +7,12 @@
 import ToRef from './ToRef';
 const myName = '刘鹏'
 
+const myAge = 25
+
+const myLike = 'running'
+
+const myGame = 'cf'
+
 export default {
   name: 'test-demo',
   components: {
