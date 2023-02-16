@@ -5,6 +5,7 @@
 <script>
 // import Ref from './Ref'
 import ToRef from './ToRef';
+const myName = '刘鹏'
 
 export default {
   name: 'test-demo',
