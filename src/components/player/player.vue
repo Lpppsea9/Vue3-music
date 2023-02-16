@@ -12,7 +12,21 @@
         <h2 class="subtitle">{{ currentSong.singer }}</h2>
         <!-- {{ currentSong }} -->
       </div>
+
       <div class="bottom">
+        <div class="dot-wrapper"></div>
+        <div class="progress-wrapper">
+          <span class="time time-1">进度条</span>
+          <div class="progress-bar-wrapper">
+            <progress-bar
+              ref="barRef"
+              :progress="progress"
+              @progress-changing=""
+              @progress-changed=""
+            >
+            </progress-bar>
+          </div>
+        </div>
         <div class="operators">
           <div class="icon i-left">
             <i @click="changeMode" :class="playModeIcon"></i>
@@ -49,12 +63,18 @@ import { useStore } from 'vuex';
 import { computed, watch, ref } from 'vue'
 import useMode from './use-mode'
 import useFavorite from './use-favorite'
+import ProgressBar from './progress-bar.vue'
 
 export default {
   name: 'music-player',
+  components: {
+    ProgressBar
+  },
   setup() {
+    // data
     const audioRef = ref(null)
     const songReady = ref(false)
+    const currentTime = ref(0)
 
     const store = useStore()
     const fullScreen = computed(() => store.state.fullScreen)
@@ -64,7 +84,9 @@ export default {
     const playing = computed(() => store.state.playing)
     // hooks
     const { playModeIcon, changeMode } = useMode()
-    const { toggleFavorite, getFavoriteIcon } = useFavorite()
+    const { getFavoriteIcon, toggleFavorite } = useFavorite()
+
+    // computed
     const playIcon = computed(() => {
       return playing.value ? 'icon-pause' : 'icon-play'
     })
@@ -72,12 +94,16 @@ export default {
       return songReady.value ? '' : 'disabled'
       // return 'disabled'
     })
+    const progress = computed(() => {
+      return currentTime.value / currentSong.value.dur
+    })
     const playMode = computed(() => store.state.playMode)
 
     watch(currentSong, (newSong) => {
       if (!newSong.id || !newSong.url) {
         return
       }
+      currentTime.value = 0
       songReady.value = false
       // 这一步直接监听currentSong的变化但没有和playing状态联系
       const audioEl = audioRef.value
@@ -268,6 +294,14 @@ export default {
       position: absolute;
       bottom: 50px;
       width: 100%;
+
+      .progress-wrapper {
+        display: flex;
+        background: greenyellow;
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px 0;
+      }
       .operators {
         display: flex;
         align-items: center;
