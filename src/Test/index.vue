@@ -1,23 +1,22 @@
 <template>
   <!-- <Ref /> -->
-  <to-ref />
+  <!-- <to-ref /> -->
+  <!-- <to-refs></to-refs> -->
+  <why-ref></why-ref>
 </template>
 <script>
 // import Ref from './Ref'
-import ToRef from './ToRef';
-const myName = '刘鹏'
-
-const myAge = 25
-
-const myLike = 'running'
-
-const myGame = 'cf'
+// import ToRef from './ToRef';
+// import ToRefs from './ToRefs';
+import WhyRef from './WhyRef.vue'
 
 export default {
   name: 'test-demo',
   components: {
     // Ref,
-    ToRef
+    // ToRef,
+    // ToRefs,
+    WhyRef
   },
   setup() {
     return {}

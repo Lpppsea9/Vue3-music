@@ -1,7 +1,7 @@
 1. vue3 新功能
 2. Composition API
 
-# 面试题
+# Vue3 面试题
 
 1. Vue3 比 Vue2 有什么优势？
 2. 描述 Vue3 生命周期
@@ -14,12 +14,31 @@
      - 更好的逻辑复用
      - 更好的类型推导
    - Composition API 和 Options API 如何选择？
-4. 如何理解 ref toRef 和 toRefs？
-   - ref
-     - 生成值类型的响应式数据
-     - 可用于模板和 reactive
-     - 通过 .value 修改值
-   - toRef
+
+###### 如何理解 ref toRef 和 toRefs？
+
+- ref
+  - 生成值类型的响应式数据
+  - 可用于模板和 reactive
+  - 通过 .value 修改值
+- toRef
+- toRefs
+- 总结:
+  > - 用 reactive 做对象的响应式,用 ref 做值类型的响应式
+  > - setup 中返回 toRefs(state),或者 toRef(state, 'xxx')
+  > - ref 的变量命名都用 xxxRef
+  > - 合成函数返回响应式对象时,使用 toRefs
+
+1. 为何需要 ref ?
+
+   - 返回值类型，会丢失响应式
+   - 如在 setup, computed, 合成函数中, 都有可能返回值类型
+
+2. 为什么需要.value ?
+   -
+
+######
+
 5. Vue3 升级了哪些重要的功能？
 6. Composition API 如何实现代码逻辑复用？
 7. Vue3 如何实现响应式？

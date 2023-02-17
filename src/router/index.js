@@ -11,7 +11,7 @@ import Test from "@/Test/index.vue";
 const routes = [
   {
     path: "/",
-    redirect: "/recommend",
+    redirect: "/test",
   },
   {
     path: "/recommend",

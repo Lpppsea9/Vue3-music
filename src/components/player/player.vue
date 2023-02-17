@@ -18,13 +18,13 @@
         <div class="progress-wrapper">
           <span class="time time-1">进度条</span>
           <div class="progress-bar-wrapper">
-            <progress-bar
+            <!-- <progress-bar
               ref="barRef"
               :progress="progress"
               @progress-changing=""
               @progress-changed=""
             >
-            </progress-bar>
+            </progress-bar> -->
           </div>
         </div>
         <div class="operators">
