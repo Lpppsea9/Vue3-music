@@ -27,6 +27,7 @@ export default {
       age: 18
     })
 
+    // computed
     const age1 = computed(() => {
       return state2.age + 1
     })
