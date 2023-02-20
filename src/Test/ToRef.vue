@@ -22,13 +22,13 @@ export default {
     */
     const state = reactive({
       age: 20,
-      name: '刘鹏',
+      name: 'LP',
       sex: 'man'
     })
 
     const stateNoReactive = {
       age: 21,
-      name: '刘鹏2',
+      name: 'LP2',
       sex: 'man2'
     }
 

@@ -11,7 +11,7 @@ export default {
   name: "ref-demo",
   setup() {
     const ageRef = ref(20) // 值类型 响应式
-    const nameRef = ref('刘鹏')
+    const nameRef = ref('LP')
     const arrRef = ref([0, 0])
     const arr = [0, 1]
 
