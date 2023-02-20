@@ -66,9 +66,35 @@
      > - 生命周期钩子函数
 
 5. Composition API 如何实现代码逻辑复用？
+
    - 例子: useMousePosition
+
 6. Vue3 如何实现响应式？
+
    - Vue2 是怎么实现的(defineProperty)
+   - Object.defineProperty 的缺点
+     > - 深度监听需要一次性递归
+     > - 无法监听新增属性/删除属性(vue.$set/$delete)
+     > - 无法监听原生数组
+   - Proxy 和 Reflect
+   - Reflect 作用
+
+     > - 和 Proxy 能力一一对应
+     > - 规范化、标准化、函数式
+
+   - 深度监听性能如何提升
+
+     - Vue2 的深度监听是上来直接递归到底,
+     - Vue3 是 get 里面递归, 什么时候用什么时候递归（获取哪一层才响应式）
+
+   - 总结
+
+     - 优点 Proxy 能规避 Object.defineProperty 的问题
+       > - 深度监听,性能更好
+       > - 可监听 新增/删除 属性
+       > - 可监听数组变化
+     - 缺点 Proxy 无法兼容所有浏览器,无法 polyfill
+
 7. watch 和 watchEffect 的区别是什么？
 8. setup 中如何获取组件实例？
 9. Vue3 为何比 Vue2 快？
