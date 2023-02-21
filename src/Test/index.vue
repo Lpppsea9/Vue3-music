@@ -4,8 +4,8 @@
   <!-- <to-refs></to-refs> -->
   <!-- <why-ref></why-ref> -->
   <!-- <hello-world @onSayHello="testHello"></hello-world> -->
-  <mouse-position v-if="flag"></mouse-position>
-
+  <!-- <mouse-position v-if="flag"></mouse-position> -->
+  <get-instance></get-instance>
   <hr />
   <button @click="changeFlag">change flag</button>
 </template>
@@ -15,7 +15,8 @@
 // import ToRefs from './ToRefs';
 // import WhyRef from './WhyRef.vue'
 // import HelloWorld from './HelloWorld.vue';
-import MousePosition from './MousePosition/index.vue'
+// import MousePosition from './MousePosition/index.vue'
+import getInstance from './getInstance.vue'
 import { ref } from 'vue'
 
 export default {
@@ -26,7 +27,8 @@ export default {
     // ToRefs,
     // WhyRef,
     // HelloWorld,
-    MousePosition
+    // MousePosition,
+    getInstance
   },
   setup() {
     const flag = ref(true)

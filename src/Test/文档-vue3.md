@@ -85,7 +85,7 @@
    - 深度监听性能如何提升
 
      - Vue2 的深度监听是上来直接递归到底,
-     - Vue3 是 get 里面递归, 什么时候用什么时候递归（获取哪一层才响应式）
+     - Vue3 是 get 里面递归, 什么时候用什么时候递归（获取哪一层就把哪一层处理成响应式）
 
    - 总结
 
@@ -95,8 +95,22 @@
        > - 可监听数组变化
      - 缺点 Proxy 无法兼容所有浏览器,无法 polyfill
 
-7. watch 和 watchEffect 的区别是什么？
-8. setup 中如何获取组件实例？
-9. Vue3 为何比 Vue2 快？
-10. Vite 是什么？
-11. Composition API 和 React Hooks 的对比
+7. Vue3 移除.sync 用法
+
+   - 子组件需在 emits 属性里写["update:xxx"]来触发父组件绑定值改变
+
+8. watch 和 watchEffect 的区别是什么？
+
+   - watch(xxxRef, (newVal,oldVal) => {},{配置})
+   - watch(() => state.xxx, (newVal,oldVal) = {}， {配置}) -> getter 函数
+   - watchEffect(为什么初始化需要执行？->因为要收集需要监听的属性)
+
+9. setup 中如何获取组件实例？
+
+   - 考察在 setup 和其他 Composition API 中是没有 this 的
+   - 可通过 getCurrentInstance 获取当前实例
+   - 若使用 Options API 可照常使用 this
+
+10. Vue3 为何比 Vue2 快？
+11. Vite 是什么？
+12. Composition API 和 React Hooks 的对比
