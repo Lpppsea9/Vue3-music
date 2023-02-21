@@ -1,5 +1,7 @@
-<template>
-  <p>getInstance-demo</p>
+<template >
+  <!-- <div> -->
+  <p ref="instancePDom">getInstance-demo</p>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -13,10 +15,14 @@ export default {
     }
   },
   setup() { // beforeCreated created 的合集
+    const instancePDom = ref(null)
+
     console.log("setup-this1", this); // undefined
     onMounted(() => {
       console.log("setup-this2", this); // undefined
       console.log(instance.data);
+
+       console.log('instancePDom', instancePDom, instancePDom.value);
     })
     const instance = getCurrentInstance()
     console.log("instance", instance);
@@ -24,7 +30,8 @@ export default {
 
     const myNum = ref(1)
     return {
-      myNum
+      myNum,
+      instancePDom // 需要返回ref dom元素
     }
   },
   mounted() {

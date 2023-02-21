@@ -110,7 +110,33 @@
    - 考察在 setup 和其他 Composition API 中是没有 this 的
    - 可通过 getCurrentInstance 获取当前实例
    - 若使用 Options API 可照常使用 this
+   - Vue2 通过 this.$refs
 
 10. Vue3 为何比 Vue2 快？
+
+    - proxy 响应式
+    - PatchFlag
+      > - 编译模板时，动态节点做标记
+      > - 标记，分为不同的类型，如 TEXT, CLASS, PROPS 或者组合
+      > - diff 算法时，可以区分静态节点，以及不同类型的动态节点
+      > - 只对比有 patchFlag 的,优化了 diff 算法, 图示: ![](assets/diff算法对比.png)
+    - hoistStatic
+      > - \_createStaticVNode 会把多个静态节点合并成一个静态节点
+      > - 将静态节点的定义，提升到父作用域，缓存起来
+      > - 多个相邻的静态节点，会被合并起来
+      > - 典型的拿空间换时间的优化策略
+    - cacheHandler
+      > - 缓存事件
+    - SSR 优化
+      > - 静态节点绕过 vdom 直接输出
+      > - 动态节点还是需要动态渲染
+    - tree-shaking
+      > - 动态引入编译需要的指令(例如指令 v-model),需要什么引用什么
+
 11. Vite 是什么？
+
+    - 新的构建和打包工具
+    - 为什么快
+      > - 开发环境使用 ES6 Module,无需打包 -非常快
+
 12. Composition API 和 React Hooks 的对比
