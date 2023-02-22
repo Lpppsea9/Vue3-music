@@ -60,7 +60,7 @@
    - Composition API
      > - reactive
      > - ref 相关
-     > - readonly
+     > - readonly 接受一个对象 (不论是响应式还是普通的) 或是一个 ref，返回一个原值的只读代理。
      > - watch 和 watchEffect
      > - setup
      > - 生命周期钩子函数
@@ -95,7 +95,7 @@
        > - 可监听数组变化
      - 缺点 Proxy 无法兼容所有浏览器,无法 polyfill
 
-7. Vue3 移除.sync 用法
+7. Vue3 移除.sync 用法改为 v-model 参数
 
    - 子组件需在 emits 属性里写["update:xxx"]来触发父组件绑定值改变
 
@@ -137,6 +137,5 @@
 
     - 新的构建和打包工具
     - 为什么快
-      > - 开发环境使用 ES6 Module,无需打包 -非常快
-
-12. Composition API 和 React Hooks 的对比
+      > - 开发环境使用 ES6 Module, 无需打包 -非常快
+      > - module 在浏览器中的应用
