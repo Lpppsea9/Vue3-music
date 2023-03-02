@@ -4,11 +4,19 @@ const { VueLoaderPlugin } = require("vue-loader");
 const { DefinePlugin } = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const webpackCommonConf = require("./webpack.common");
+const { merge } = require("webpack-merge");
 const srcPath = path.join(__dirname, "..", "src");
-console.log("\n");
-console.log("srcPath->", srcPath);
+const distPath = path.join(__dirname, "..", "dist");
 
-module.exports = {
+console.log("__dirname ->", __dirname);
+console.log("srcPath ->", srcPath);
+console.log("distPath ->", distPath);
+// 当前路径\Code\vue3-music\config
+console.log("1---->", path.resolve("a", "b", "..", "d"));
+console.log("2---->", path.resolve());
+
+module.exports = merge(webpackCommonConf, {
   entry: {
     path: "./src/main.js",
   },
@@ -22,42 +30,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        // exclude: /node_modules/, // 排除node_modules中的js文件(这些文件不处理)
-        include: path.resolve(__dirname, "../src"), // 只处理src下的文件, 其他文件不处理
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"], // 智能预设
-              cacheDirectory: true, // 开启babel缓存
-              cacheCompression: false, // 关闭缓存文件压缩
-              // plugins: ["@babel/plugin-transform-runtime"], //减少代码体积
-            },
-          },
-        ],
-      },
-      {
         test: /\.vue$/, // 处理vue文件
         use: "vue-loader",
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader", // 将sass编译成css文件
-          {
-            loader: "sass-loader",
-            options: {
-              // 全局引入变量和 mixin，编译scss时起作用mixin函数
-              additionalData: `
-                @import "@/assets/scss/variable.scss";
-                @import "@/assets/scss/mixin.scss";
-              `,
-            },
-          },
-        ],
       },
       {
         test: /\.(png|jpe?g|gif)$/,
@@ -93,15 +67,20 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     // 开发服务器：不会输出资源，在内存中编译打包的
+    port: 8080, // 启动服务器端口号
     host: "localhost", // 启动服务器域名
-    port: "8080", // 启动服务器端口号
     // open: true, // 是否打开浏览器
+    client: {
+      progress: true,
+    },
     hot: true, // hmr热模块替换 style-loader默认实现了热模块替换 vue-loader自动实现热模块替换
     static: {
       publicPath: "/",
     },
+    // 设置代理
+    proxy: {},
     onBeforeSetupMiddleware(app) {
       registerRouter(app.app);
     },
   },
-};
+});

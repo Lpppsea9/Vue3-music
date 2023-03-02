@@ -25,22 +25,30 @@
 			// bar(); // 2
 
 			// demo02
-			function foo() {
-				var x = 20;
-				var y = 10;
-				function child() {
-					var m = 5;
+			// function foo() {
+			// 	var x = 20;
+			// 	var y = 10;
+			// 	function child() {
+			// 		var m = 5;
 
-					return function add() {
-						var z = "this is add";
-						return x + y;
-					};
-				}
+			// 		return function add() {
+			// 			var z = "this is add";
+			// 			return x + y;
+			// 		};
+			// 	}
 
-				return child();
+			// 	return child();
+			// }
+
+			// foo()();
+			const a = [1, 2, 3];
+			const b = [4, 5, 6];
+			for (let index = 0; index < a.length; index++) {
+				console.log("a数组", a[index]);
 			}
-
-			foo()();
+			for (let index = 0; index < b.length; index++) {
+				console.log("b数组", b[index]);
+			}
 		</script>
 	</body>
 </html>
