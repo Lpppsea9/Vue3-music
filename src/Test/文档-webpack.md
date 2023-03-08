@@ -31,4 +31,11 @@
    > - ParallelUgifyPlugin(多进程压缩，配置 output {beautify,comments},compress{warnings,drop_console})
    > - TerserWebpackPlugin(可在 optimization 里配置, 配置 include exclude parallel)
 4. HMR 热更新(自动开启)
-5. DllPlugin
+5. DllPlugin 动态链接库(manifest.json 用来映射)
+6. 什么是 Tree-Shaking?
+7. Module 和 Commonjs 的区别
+8. 什么是 Scope Hosting?(作用域提升)
+9. babel
+   > - babel-polyfill (core-js 和 regenerator(支持 ES6 generate 的语法) 两者的集合)
+   > - babel-polyfill 7.4 之后已被弃用，推荐直接使用 core-js 和 regenerator
+   > - .babelrc 和 babel.config.js

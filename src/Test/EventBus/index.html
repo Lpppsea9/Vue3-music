@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>event bus</title>
+	</head>
+	<body>
+		<script>
+			class EventEmitter {
+				constructor() {
+					this.cache = {};
+				}
+
+				on(name, fn) {
+					if (this.cache[name]) {
+						this.cache[name].push(fn);
+					} else {
+						this.cache[name] = [fn];
+					}
+				}
+
+				off(name, fn) {
+					const tasks = this.cache[name];
+					if (tasks) {
+						const index = tasks.findIndex((f) => f === fn || f.callback === fn);
+						if (index >= 0) {
+							tasks.splice(index, 1);
+						}
+					}
+				}
+
+				emit(name) {
+					if (this.cache[name]) {
+						// 创建副本，如果回调函数内继续注册相同事件，会造成死循环
+						const tasks = this.cache[name].slice();
+						for (let fn of tasks) {
+							fn();
+						}
+					}
+				}
+
+				emit(name, once = false) {
+					if (this.cache[name]) {
+						// 创建副本，如果回调函数内继续注册相同事件，会造成死循环
+						const tasks = this.cache[name].slice();
+						for (let fn of tasks) {
+							fn();
+						}
+						if (once) {
+							delete this.cache[name];
+						}
+					}
+				}
+			}
+
+			class myEventEmitter {
+				constructor() {
+					// 事件对象
+					this.eventObj = {};
+				}
+
+				on(name, fn) {
+					if (this.eventObj[name]) {
+						this.eventObj[name].push(fn);
+					} else {
+						this.eventObj[name] = [fn];
+					}
+				}
+
+				off(name, fn) {
+					const curTasks = this.eventObj[name];
+					if (curTasks) {
+						const index = curTasks.findIndex((f) => f === fn);
+						if (index >= 0) {
+							curTasks.splice(index, 1);
+						}
+					}
+				}
+
+				emit(name) {
+					if (this.eventObj[name]) {
+						const tasks = this.eventObj[name].slice();
+						for (let fn of tasks) {
+							fn();
+						}
+					}
+				}
+
+				emit(name, once = false) {
+					if (this.eventObj[name]) {
+					}
+				}
+			}
+
+			// 测试
+			const eventBus = new EventEmitter();
+			const task1 = () => {
+				console.log("task1");
+			};
+			const task2 = () => {
+				console.log("task2");
+			};
+			eventBus.on("task", task1);
+			eventBus.on("task", task2);
+
+			setTimeout(() => {
+				eventBus.emit("task");
+			}, 1000);
+		</script>
+	</body>
+</html>
