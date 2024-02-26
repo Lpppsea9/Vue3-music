@@ -5,13 +5,15 @@ import Singer from "@/views/singer.vue";
 import TopList from "@/views/top-list.vue";
 import SingerDetail from "@/views/singer-detail.vue";
 import Test from "@/Test/index.vue";
+import App from "@/App.vue";
 
 // import Loading from '@/components/base/loading/loading.vue'
 
 const routes = [
   {
     path: "/",
-    redirect: "/test",
+    // redirect: "/test",
+    component: App,
   },
   {
     path: "/recommend",

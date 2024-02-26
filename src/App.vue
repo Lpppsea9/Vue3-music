@@ -8,8 +8,8 @@
 
 <script>
 // import Header from '@/components/header/header.vue'
-import Tab from '@/components/tab/tab.vue'
-import Player from '@/components/player/player.vue'
+import Tab from "@/components/tab/tab.vue";
+import Player from "@/components/player/player.vue";
 // import Test from '@/Test/index.vue'
 
 export default {
@@ -18,6 +18,6 @@ export default {
     MTab: Tab,
     Player,
     // Test
-  }
-}
+  },
+};
 </script>
